@@ -4,22 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style.css">
     <title>Register</title>
   </head>
   <body>
     <div id="res_login" class="d-flex justify-content-center align-items-center" style="height:100vh;">
-        <form>
+        <form id="registration_form">
             <h4 class="text-center pb-3">Restaurant Registation</h4>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <label for="restaurant_name">Restaurant Name</label>
+              <input type="text" class="form-control" id="restaurant_name" placeholder="Enter Restaurant name">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
-            <button type="submit" class="btn btn-primary mr-5 w-100">Register</button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button id="button" type="submit" class="btn btn-primary mr-5 w-100">Register</button>
         </form>
     </div>
   
@@ -28,10 +32,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-<script type="text/javascript">
-$(document).ready(function () {
-    $("#restaurant_button").click(function () {
-        $("#res_login").show();
-    });
-});
+<script>
+  $(document).ready(function(){
+      $("#button").click(function(){
+          var res_name=$("#restaurant_name").val();
+          var email=$("#email").val();
+          var password=$("#password").val();
+          $.ajax({
+              url:'insert.php',
+              method:'POST',
+              data:{
+                  name:res_name,
+                  email:email,
+                  passowrd:password
+              },
+             success:function(data){
+                 alert(data);
+             }
+          });
+      });
+  });
 </script>
